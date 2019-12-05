@@ -2,6 +2,8 @@
 
 I don't have a test bot, so here's a simulator that assumes that the robot has closed-loop velocity PID.
 
+Since this is for school, everything in here is original code. In actual FRC, probably none of it will be original. 
+
 ### Changelog
 
 * **October 22, 2019:** fixed more `double` to `int` issues and made quicksort work with sorting 2-dimensional arrays. The following methods in `PathGenerator` are confirmed to work:

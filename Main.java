@@ -69,17 +69,17 @@ class Main {
         double[][] origin = new double[][] {
             {0.0, 0.0}
         };
-        Robot testBot = new Robot(origin, 0.02, 100.0);
-        double[][] unitI = new double[][] {
-            {1.0, 0.0}
-        };
+        Robot testBot = new Robot(origin, 5.0 * Math.PI, 100.0);
+        // double[][] unitI = new double[][] {
+        //     {1.0, 0.0}
+        // };
 
         // double[][] unitJ = testBot.rotate(unitI, 90.0);
         // System.out.println("Thhis should return the j unit vector: (" + unitJ[0][0] + ", " + unitJ[0][1] + ")");
 
         // testBot.updatePos(true, 5.0, 990);
         
-        testBot.tankDrive(1.0, -1.0);
+        testBot.tankDrive(20.0, 10.0);
 
         System.out.println("Robot position: (" + testBot.robotPos[0][0] + ", " + testBot.robotPos[0][1] + ")");
         System.out.println("Robot angle: " + testBot.robotAngle);
