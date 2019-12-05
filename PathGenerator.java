@@ -24,20 +24,16 @@ public class PathGenerator {
 	 * The constructor for a {@code PathGenerator} object.
 	 * <b>UNITS ARE IN INCHES.</b>
 	 * 
-	 * @param route The path, represented by a spline.
+	 * @param route The path, represented by an array of (x, y) coordinates.
 	 * @param pathMaxVel The maxmimum theoretical velocity the path can be.
 	 * @param accel The acceleration of the robot.
 	 * @param lookaheadRadius The radius for the lookahead point. Usually a value from 12-25 inches.
 	 */
-	public PathGenerator(Spline route, double pathMaxVel, double accel, double lookaheadRadius) {
+	public PathGenerator(double[][] route, double pathMaxVel, double accel, double lookaheadRadius) {
 		// Doesn't have to be 6, but it is 6.
 		// May change the second and third values depending on the path.
-		double[][] temp = route.interpolate(0.01, 6.0);
-		this.path = new double[temp.length][2];
-		for(int i = 0; i < temp.length; ++i) {
-			this.path[i][0] = temp[i][0];
-			this.path[i][1] = temp[i][1];
-		}
+		this.path = route;
+		
 		this.pathMaxVel = pathMaxVel;
 		this.accel = accel;
 		this.robotPos = new double[][] {
