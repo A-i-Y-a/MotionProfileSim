@@ -75,11 +75,11 @@ class Main {
         // };
 
         // double[][] unitJ = testBot.rotate(unitI, 90.0);
-        // System.out.println("Thhis should return the j unit vector: (" + unitJ[0][0] + ", " + unitJ[0][1] + ")");
+        // System.out.println("This should return the j unit vector: (" + unitJ[0][0] + ", " + unitJ[0][1] + ")");
 
         // testBot.updatePos(true, 5.0, 990);
         
-        testBot.tankDrive(20.0, 10.0);
+        testBot.tankDrive(-20.0, -10.0);
 
         System.out.println("Robot position: (" + testBot.robotPos[0][0] + ", " + testBot.robotPos[0][1] + ")");
         System.out.println("Robot angle: " + testBot.robotAngle);
