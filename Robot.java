@@ -48,7 +48,7 @@ public class Robot {
      * @param rVelocity Velocity of the right wheels (motor control group).
      */
     public void tankDrive(double lVelocity, double rVelocity) {
-        // System.out.println("Left = Right? " + (lVelocity == rVelocity));
+        // // System.out.println("Left = Right? " + (lVelocity == rVelocity));
         if(lVelocity == rVelocity) {
             this.robotPos[0][0] += lVelocity * Math.cos(Math.toRadians(this.robotAngle)) * this.timeInterval;
             this.robotPos[0][1] += lVelocity * Math.sin(Math.toRadians(this.robotAngle)) * this.timeInterval;
@@ -59,20 +59,20 @@ public class Robot {
                     double[][] projectedVector = new double[][] {
                         {exradius * Math.cos(Math.toRadians(this.robotAngle)), exradius * Math.sin(Math.toRadians(this.robotAngle))}
                     };
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     double angularVelocity = (lVelocity - rVelocity) / this.trackLength;
-                    System.out.println("Angular velocity: " + angularVelocity + " rad/s");
+                    // System.out.println("Angular velocity: " + angularVelocity + " rad/s");
                     projectedVector = rotate(projectedVector, -90.0, false);
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     this.robotPos[0][0] += projectedVector[0][0];
                     this.robotPos[0][1] += projectedVector[0][1];
-                    System.out.println("Robot position: (" + this.robotPos[0][0] + "," + this.robotPos[0][1] + ")");
+                    // System.out.println("Robot position: (" + this.robotPos[0][0] + "," + this.robotPos[0][1] + ")");
                     projectedVector[0][0] = -1.0 * projectedVector[0][0];
                     projectedVector[0][1] = -1.0 * projectedVector[0][1];
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
-                    System.out.println("Angular displacement: " + -1.0 * angularVelocity * this.timeInterval);
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Angular displacement: " + -1.0 * angularVelocity * this.timeInterval);
                     projectedVector = rotate(projectedVector, -1.0 * angularVelocity * this.timeInterval, true);
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     this.robotPos[0][0] += projectedVector[0][0];
                     this.robotPos[0][1] += projectedVector[0][1];
                     if(this.robotPos[0][0] == 0 && this.robotPos[0][1] == 0) {
@@ -86,22 +86,22 @@ public class Robot {
                         {inradius * Math.cos(Math.toRadians(this.robotAngle)), inradius * Math.sin(Math.toRadians(this.robotAngle))}
                     };
                     double angularVelocity = (lVelocity - rVelocity) / this.trackLength; 
-                    System.out.println("Angular velocity: " + angularVelocity + " rad/s");
+                    // System.out.println("Angular velocity: " + angularVelocity + " rad/s");
                     projectedVector = rotate(projectedVector, -90.0, false);
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     this.robotPos[0][0] += projectedVector[0][0];
                     this.robotPos[0][1] += projectedVector[0][1];
-                    System.out.println("Robot position: (" + this.robotPos[0][0] + "," + this.robotPos[0][1] + ")");
+                    // System.out.println("Robot position: (" + this.robotPos[0][0] + "," + this.robotPos[0][1] + ")");
                     projectedVector[0][0] = -1.0 * projectedVector[0][0];
                     projectedVector[0][1] = -1.0 * projectedVector[0][1];
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
-                    System.out.println("Angular displacement: " + -1.0 * angularVelocity * this.timeInterval);
-                    projectedVector = rotate(projectedVector, -1.0 * angularVelocity * this.timeInterval, true);
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Angular displacement: " + angularVelocity * this.timeInterval);
+                    projectedVector = rotate(projectedVector, angularVelocity * this.timeInterval, true);
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     this.robotPos[0][0] += projectedVector[0][0];
                     this.robotPos[0][1] += projectedVector[0][1];
                     if(this.robotPos[0][0] == 0 && this.robotPos[0][1] == 0) {
-                        this.robotAngle = Math.toDegrees(-1.0 * angularVelocity * this.timeInterval);
+                        this.robotAngle = Math.toDegrees(angularVelocity * this.timeInterval);
                     } else {
                         this.robotAngle = Math.toDegrees(Math.atan2(projectedVector[0][1], projectedVector[0][0])) - 90.0;
                     }
@@ -113,18 +113,18 @@ public class Robot {
                         {inradius * Math.cos(Math.toRadians(this.robotAngle)), inradius * Math.sin(Math.toRadians(this.robotAngle))}
                     };
                     double angularVelocity = (rVelocity - lVelocity) / this.trackLength;
-                    System.out.println("Angular velocity: " + angularVelocity + " rad/s");
+                    // System.out.println("Angular velocity: " + angularVelocity + " rad/s");
                     projectedVector = rotate(projectedVector, 90.0, false);
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     this.robotPos[0][0] += projectedVector[0][0];
                     this.robotPos[0][1] += projectedVector[0][1];
-                    System.out.println("Robot position: (" + this.robotPos[0][0] + "," + this.robotPos[0][1] + ")");
+                    // System.out.println("Robot position: (" + this.robotPos[0][0] + "," + this.robotPos[0][1] + ")");
                     projectedVector[0][0] = -1.0 * projectedVector[0][0];
                     projectedVector[0][1] = -1.0 * projectedVector[0][1];
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
-                    System.out.println("Angular displacement: " + -1.0 * angularVelocity * this.timeInterval);
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Angular displacement: " + -1.0 * angularVelocity * this.timeInterval);
                     projectedVector = rotate(projectedVector, -1.0 * angularVelocity * this.timeInterval, true);
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     this.robotPos[0][0] += projectedVector[0][0];
                     this.robotPos[0][1] += projectedVector[0][1];
                     if(this.robotPos[0][0] == 0 && this.robotPos[0][1] == 0) {
@@ -138,22 +138,22 @@ public class Robot {
                         {exradius * Math.cos(Math.toRadians(this.robotAngle)), exradius * Math.sin(Math.toRadians(this.robotAngle))}
                     };
                     double angularVelocity = (lVelocity - rVelocity) / this.trackLength;
-                    System.out.println("Angular velocity: " + angularVelocity + " rad/s");
+                    // System.out.println("Angular velocity: " + angularVelocity + " rad/s");
                     projectedVector = rotate(projectedVector, 90.0, false);
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     this.robotPos[0][0] += projectedVector[0][0];
                     this.robotPos[0][1] += projectedVector[0][1];
-                    System.out.println("Robot position: (" + this.robotPos[0][0] + "," + this.robotPos[0][1] + ")");
+                    // System.out.println("Robot position: (" + this.robotPos[0][0] + "," + this.robotPos[0][1] + ")");
                     projectedVector[0][0] = -1.0 * projectedVector[0][0];
                     projectedVector[0][1] = -1.0 * projectedVector[0][1];
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
-                    System.out.println("Angular displacement: " + -1.0 * angularVelocity * this.timeInterval);
-                    projectedVector = rotate(projectedVector, -1.0 * angularVelocity * this.timeInterval, true);
-                    System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Angular displacement: " + angularVelocity * this.timeInterval);
+                    projectedVector = rotate(projectedVector, angularVelocity * this.timeInterval, true);
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     this.robotPos[0][0] += projectedVector[0][0];
                     this.robotPos[0][1] += projectedVector[0][1];
                     if(this.robotPos[0][0] == 0 && this.robotPos[0][1] == 0) {
-                        this.robotAngle = Math.toDegrees(-1.0 * angularVelocity * this.timeInterval);
+                        this.robotAngle = Math.toDegrees(angularVelocity * this.timeInterval);
                     } else {
                         this.robotAngle = 180.0 + (Math.toDegrees(Math.atan2(projectedVector[0][1], projectedVector[0][0])) - 90.0);
                     }
@@ -167,38 +167,102 @@ public class Robot {
                         {exradius * Math.cos(Math.toRadians(this.robotAngle)), exradius * Math.sin(Math.toRadians(this.robotAngle))}
                     };
                     double angularVelocity = (rVelocity - lVelocity) / this.trackLength;
-                    projectedVector = rotate(projectedVector, angularVelocity * this.timeInterval, false);
+                    // System.out.println("Angular velocity: " + angularVelocity + " rad/s");
+                    projectedVector = rotate(projectedVector, 90.0, false);
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     this.robotPos[0][0] += projectedVector[0][0];
                     this.robotPos[0][1] += projectedVector[0][1];
+                    // System.out.println("Robot position: (" + this.robotPos[0][0] + "," + this.robotPos[0][1] + ")");
+                    projectedVector[0][0] = -1.0 * projectedVector[0][0];
+                    projectedVector[0][1] = -1.0 * projectedVector[0][1];
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Angular displacement: " + angularVelocity * this.timeInterval);
+                    projectedVector = rotate(projectedVector, angularVelocity * this.timeInterval, true);
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    this.robotPos[0][0] += projectedVector[0][0];
+                    this.robotPos[0][1] += projectedVector[0][1];
+                    if(this.robotPos[0][0] == 0 && this.robotPos[0][1] == 0) {
+                        this.robotAngle = Math.toDegrees(angularVelocity * this.timeInterval);
+                    } else {
+                        this.robotAngle = 180.0 + (Math.toDegrees(Math.atan2(projectedVector[0][1], projectedVector[0][0])) - 90.0);
+                    }
                 } else {
-                    double inradius = 0.5 * this.trackLength - this.trackLength * rVelocity / (rVelocity - lVelocity);
+                    double inradius = 0.5 * this.trackLength - this.trackLength * lVelocity / (rVelocity - lVelocity);
                     double[][] projectedVector = new double[][] {
                         {inradius * Math.cos(Math.toRadians(this.robotAngle)), inradius * Math.sin(Math.toRadians(this.robotAngle))}
                     }; 
                     double angularVelocity = (rVelocity - lVelocity) / this.trackLength;
-                    projectedVector = rotate(projectedVector, angularVelocity * this.timeInterval, false);
+                    // System.out.println("Angular velocity: " + angularVelocity + " rad/s");
+                    projectedVector = rotate(projectedVector, 90.0, false);
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     this.robotPos[0][0] += projectedVector[0][0];
                     this.robotPos[0][1] += projectedVector[0][1];
+                    // System.out.println("Robot position: (" + this.robotPos[0][0] + "," + this.robotPos[0][1] + ")");
+                    projectedVector[0][0] = -1.0 * projectedVector[0][0];
+                    projectedVector[0][1] = -1.0 * projectedVector[0][1];
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Angular displacement: " +  angularVelocity * this.timeInterval);
+                    projectedVector = rotate(projectedVector,  angularVelocity * this.timeInterval, true);
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    this.robotPos[0][0] += projectedVector[0][0];
+                    this.robotPos[0][1] += projectedVector[0][1];
+                    if(this.robotPos[0][0] == 0 && this.robotPos[0][1] == 0) {
+                        this.robotAngle = Math.toDegrees( angularVelocity * this.timeInterval);
+                    } else {
+                        this.robotAngle = 180.0 + (Math.toDegrees(Math.atan2(projectedVector[0][1], projectedVector[0][0])) - 90.0);
+                    }
                 }
             } else {
                 if(lVelocity >= 0) {
-                    double inradius = 0.5 * this.trackLength + rVelocity * this.trackLength / (lVelocity - rVelocity);
+                    double inradius = 0.5 * this.trackLength + lVelocity * this.trackLength / (lVelocity - rVelocity);
                     double[][] projectedVector = new double[][] {
                         {inradius * Math.cos(Math.toRadians(this.robotAngle)), inradius * Math.sin(Math.toRadians(this.robotAngle))}
                     }; 
                     double angularVelocity = (lVelocity - rVelocity) / this.trackLength;
-                    projectedVector = rotate(projectedVector, -1.0 * angularVelocity * this.timeInterval, false);
+                    // System.out.println("Angular velocity: " + angularVelocity + " rad/s");
+                    projectedVector = rotate(projectedVector, -90.0, false);
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     this.robotPos[0][0] += projectedVector[0][0];
                     this.robotPos[0][1] += projectedVector[0][1];
+                    // System.out.println("Robot position: (" + this.robotPos[0][0] + "," + this.robotPos[0][1] + ")");
+                    projectedVector[0][0] = -1.0 * projectedVector[0][0];
+                    projectedVector[0][1] = -1.0 * projectedVector[0][1];
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Angular displacement: " + -1.0 * angularVelocity * this.timeInterval);
+                    projectedVector = rotate(projectedVector, -1.0 * angularVelocity * this.timeInterval, true);
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    this.robotPos[0][0] += projectedVector[0][0];
+                    this.robotPos[0][1] += projectedVector[0][1];
+                    if(this.robotPos[0][0] == 0 && this.robotPos[0][1] == 0) {
+                        this.robotAngle = Math.toDegrees(-1.0 * angularVelocity * this.timeInterval);
+                    } else {
+                        this.robotAngle = (Math.toDegrees(Math.atan2(projectedVector[0][1], projectedVector[0][0])) - 90.0);
+                    }
                 } else {
                     double exradius = 0.5 * this.trackLength + this.trackLength * lVelocity / (rVelocity - lVelocity);
                     double[][] projectedVector = new double[][] {
                         {exradius * Math.cos(Math.toRadians(this.robotAngle)), exradius * Math.sin(Math.toRadians(this.robotAngle))}
                     };
                     double angularVelocity = (rVelocity - lVelocity) / this.trackLength;
-                    projectedVector = rotate(projectedVector, -1.0 * angularVelocity * this.timeInterval, false);
+                    // System.out.println("Angular velocity: " + angularVelocity + " rad/s");
+                    projectedVector = rotate(projectedVector, 90.0, false);
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
                     this.robotPos[0][0] += projectedVector[0][0];
                     this.robotPos[0][1] += projectedVector[0][1];
+                    // System.out.println("Robot position: (" + this.robotPos[0][0] + "," + this.robotPos[0][1] + ")");
+                    projectedVector[0][0] = -1.0 * projectedVector[0][0];
+                    projectedVector[0][1] = -1.0 * projectedVector[0][1];
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    // System.out.println("Angular displacement: " + -1.0 * angularVelocity * this.timeInterval);
+                    projectedVector = rotate(projectedVector, -1.0 * angularVelocity * this.timeInterval, true);
+                    // System.out.println("Projected vector: (" + projectedVector[0][0] + "," + projectedVector[0][1] + ")");
+                    this.robotPos[0][0] += projectedVector[0][0];
+                    this.robotPos[0][1] += projectedVector[0][1];
+                    if(this.robotPos[0][0] == 0 && this.robotPos[0][1] == 0) {
+                        this.robotAngle = Math.toDegrees(-1.0 * angularVelocity * this.timeInterval);
+                    } else {
+                        this.robotAngle = (Math.toDegrees(Math.atan2(projectedVector[0][1], projectedVector[0][0])) - 90.0);
+                    }
                 }
             }
         }

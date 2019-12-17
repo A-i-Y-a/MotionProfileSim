@@ -19,6 +19,7 @@ public class PathGenerator {
 	// Why is this 12 when the recommended distance between points is 6?
 	public double lookaheadRadius;
 	public int prevClosestPoint;
+	public double robotAngle;
 
 	/**
 	 * The constructor for a {@code PathGenerator} object.
@@ -39,6 +40,7 @@ public class PathGenerator {
 		this.robotPos = new double[][] {
 			{0.0, 0.0},
 		};
+		this.robotAngle = 0.0;
 		this.lookaheadRadius = lookaheadRadius;
 		// The first lookahead point is just a point along the first. I feel like this is wrong.
 		this.currentLookaheadPoint = new double[][] {
@@ -191,8 +193,8 @@ public class PathGenerator {
 				double c = Magnitude(f[0][0], f[0][1], 0.0, 0.0) * Magnitude(f[0][0], f[0][1], 0.0, 0.0) - objectLookaheadRadius * objectLookaheadRadius;
 				double discriminant = b * b - 4 * a * c;
 
-				if(discriminant < 0) {
-					return lookaheadPoint(objectLookaheadRadius - 0.1);
+				if(discriminant < 0 ) {
+					
 				} else {
 					discriminant = Math.sqrt(discriminant);
 					double t1 = (-b - discriminant) / (2 * a);
@@ -234,12 +236,19 @@ public class PathGenerator {
 			double dx = this.currentLookaheadPoint[0][0] - this.robotPos[0][0];
 			double dy = this.currentLookaheadPoint[0][1] - this.robotPos[0][1];
 
+			System.out.println("dx and dy: (" + dx + ", " + dy + ")");
+
 			double lookaheadDistance = Magnitude(this.currentLookaheadPoint[0][0], this.currentLookaheadPoint[0][1], this.robotPos[0][0], this.robotPos[0][1]);
-			double cos = dy / lookaheadDistance;
-			double tan = dy / dx;
+			double cos = Math.cos(Math.toRadians(this.robotAngle));
+			double tan = Math.tan(Math.toRadians(this.robotAngle));
+
+			// System.out.println("Lookahead distance: " + lookaheadDistance);
 
 			double a = -1.0 * tan;
 			double c = tan * this.robotPos[0][0] - this.robotPos[0][1];
+
+			System.out.println("(a, c): (" + a + ", " + c + ")");
+
 			// Point-to-line
 			double x = Math.abs(a * this.currentLookaheadPoint[0][0] + this.currentLookaheadPoint[0][1] + c) / Math.sqrt(a * a + 1);
 
@@ -275,9 +284,11 @@ public class PathGenerator {
 		 * @param xCoord
 		 * @param yCoord
 		 */
-		public void updatePos(double xCoord, double yCoord) {
+		public void updatePos(double xCoord, double yCoord, double angle) {
 			this.robotPos[0][0] = xCoord;
 			this.robotPos[0][1] = yCoord;
+			this.robotAngle = angle;
+			this.robotAngle = this.robotAngle % 360.0;
 		}
 
 		public void updateLookaheadPoint() {
@@ -359,8 +370,10 @@ public class PathGenerator {
 	 * 
 	 * @param robotPos
 	 */
-	public void updatePos(double[][] robotPos) {
+	public void updatePos(double[][] robotPos, double angle) {
 		this.robotPos[0][0] = robotPos[0][0];
 		this.robotPos[0][1] = robotPos[0][1];
+		angle = angle % 360.0;
+		this.robotAngle = angle;
 	}
 }
