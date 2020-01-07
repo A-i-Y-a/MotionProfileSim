@@ -91,7 +91,7 @@ class Main {
 
     public static void followPath(PathGenerator generator, Robot robot) {
         double distanceFromTarget = Math.hypot(generator.path[generator.path.length - 1][0] - robot.robotPos[0][0], generator.path[generator.path.length - 1][1] - robot.robotPos[0][1]);
-        while(distanceFromTarget > 0.1) {
+        while(Math.hypot(robot.robotPos[0][0], robot.robotPos[0][1]) < 1000.0) {
             generator.updatePos(robot.robotPos, robot.robotAngle);
             robot.tankDrive(generator.velocity(robot.trackLength, true), generator.velocity(robot.trackLength, false));
             distanceFromTarget = Math.hypot(generator.path[generator.path.length - 1][0] - robot.robotPos[0][0], generator.path[generator.path.length - 1][1] - robot.robotPos[0][1]);
@@ -100,6 +100,9 @@ class Main {
             System.out.println("Lookahead point: (" + generator.currentLookaheadPoint[0][0] + ", " + generator.currentLookaheadPoint[0][1] + ")");
             System.out.println("Lookahead curvature: " + generator.lookaheadCurvature());
             System.out.println("Left/Right Velocities: (" + generator.velocity(robot.trackLength, true) + ", " + generator.velocity(robot.trackLength, false) + ")");
+        }
+        if(distanceFromTarget <= 0.1) {
+            System.out.println("Done!");
         }
     }
 }

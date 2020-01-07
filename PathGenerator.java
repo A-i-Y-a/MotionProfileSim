@@ -193,8 +193,9 @@ public class PathGenerator {
 				double c = Magnitude(f[0][0], f[0][1], 0.0, 0.0) * Magnitude(f[0][0], f[0][1], 0.0, 0.0) - objectLookaheadRadius * objectLookaheadRadius;
 				double discriminant = b * b - 4 * a * c;
 
-				if(discriminant < 0 ) {
-					
+				if(discriminant < 0 && (this.closestPoint() == path.length || this.closestPoint() == path.length - 1)) {
+					this.lookaheadRadius = this.lookaheadRadius - 0.1;
+					return lookaheadPoint(this.lookaheadRadius);
 				} else {
 					discriminant = Math.sqrt(discriminant);
 					double t1 = (-b - discriminant) / (2 * a);

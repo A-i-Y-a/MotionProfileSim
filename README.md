@@ -29,3 +29,5 @@ Since this is for school, everything in here is original code. In actual FRC, pr
 * **December 5, 2019:** Realized I did my position updates for `tankDrive` wrong. This is beautiful. Physics is hard. AHHH HELP MY CODE IS WRONG HELP
 
 * **December 9, 2019:** Did `tankDrive` right. Still need four more cases.
+
+* **January 7, 2020:** Having trouble making the bot move at the right angle. It's moving alright, but just not in the desired direction.
