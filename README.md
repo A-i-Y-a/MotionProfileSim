@@ -31,3 +31,5 @@ Since this is for school, everything in here is original code. In actual FRC, pr
 * **December 9, 2019:** Did `tankDrive` right. Still need four more cases.
 
 * **January 7, 2020:** Having trouble making the bot move at the right angle. It's moving alright, but just not in the desired direction.
+
+* **January 16, 2020:** It works. At least for a line. Testing more advanced paths later. Yay.

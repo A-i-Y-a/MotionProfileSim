@@ -81,7 +81,7 @@ class Main {
         
         // testBot.tankDrive(-10.0, 20.0);
 
-        System.out.println("Number of elements in path: " + testSplinePath.length);
+        // System.out.println("Number of elements in path: " + testSplinePath.length);
 
         followPath(testGenerator, testBot);
 
@@ -91,7 +91,7 @@ class Main {
 
     public static void followPath(PathGenerator generator, Robot robot) {
         double distanceFromTarget = Math.hypot(generator.path[generator.path.length - 1][0] - robot.robotPos[0][0], generator.path[generator.path.length - 1][1] - robot.robotPos[0][1]);
-        while(Math.hypot(robot.robotPos[0][0], robot.robotPos[0][1]) < 1000.0) {
+        while(Math.hypot(robot.robotPos[0][0], robot.robotPos[0][1]) < 142.0) {
             generator.updatePos(robot.robotPos, robot.robotAngle);
             robot.tankDrive(generator.velocity(robot.trackLength, true), generator.velocity(robot.trackLength, false));
             distanceFromTarget = Math.hypot(generator.path[generator.path.length - 1][0] - robot.robotPos[0][0], generator.path[generator.path.length - 1][1] - robot.robotPos[0][1]);

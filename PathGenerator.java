@@ -237,7 +237,7 @@ public class PathGenerator {
 			double dx = this.currentLookaheadPoint[0][0] - this.robotPos[0][0];
 			double dy = this.currentLookaheadPoint[0][1] - this.robotPos[0][1];
 
-			System.out.println("dx and dy: (" + dx + ", " + dy + ")");
+			// System.out.println("dx and dy: (" + dx + ", " + dy + ")");
 
 			double lookaheadDistance = Magnitude(this.currentLookaheadPoint[0][0], this.currentLookaheadPoint[0][1], this.robotPos[0][0], this.robotPos[0][1]);
 			double cos = Math.cos(Math.toRadians(this.robotAngle));
@@ -248,7 +248,7 @@ public class PathGenerator {
 			double a = -1.0 * tan;
 			double c = tan * this.robotPos[0][0] - this.robotPos[0][1];
 
-			System.out.println("(a, c): (" + a + ", " + c + ")");
+			// System.out.println("(a, c): (" + a + ", " + c + ")");
 
 			// Point-to-line
 			double x = Math.abs(a * this.currentLookaheadPoint[0][0] + this.currentLookaheadPoint[0][1] + c) / Math.sqrt(a * a + 1);
